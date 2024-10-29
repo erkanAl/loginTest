@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <div class="input-group">
+            <label for="username">Benutzername</label>
+            <input type="text" id="username" placeholder="Geben Sie Ihren Benutzernamen ein">
+        </div>
+        <div class="input-group">
+            <label for="password">Passwort</label>
+            <input type="password" id="password" placeholder="Geben Sie Ihr Passwort ein">
+        </div>
+        <button class="login-button" onclick="sendLogin()">Anmelden</button>
+    </div>
+
+    <script>
+        async function sendLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/index.html', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                window.location.href = 'index2.html';
+            } else {
+                alert('Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.');
+            }
+        }
+    </script>
+</body>
+</html>
